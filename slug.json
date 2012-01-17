@@ -1,0 +1,17 @@
+{        
+  "minify": "false",
+  "public": "./public",      
+  "dependencies": [
+    "es5-shimify", 
+    "json2ify", 
+    "jqueryify", 
+    "spine",
+    "spine/lib/local",
+    "spine/lib/ajax",
+    "spine/lib/route",
+    "spine/lib/tmpl",
+    "spine/lib/list",
+    "spine/lib/manager"
+  ],
+  "libs": []
+}
