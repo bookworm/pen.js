@@ -10,7 +10,7 @@ class Markdown
   list:    
     style: "string"
     type: "li"   
-    lineHeight: 12
+    lineHeight: 13
   hr:       "hr"
   linktext: "link"
   linkhref: "string"
@@ -33,6 +33,8 @@ class Markdown
       name: "xml"
       htmlMode: true  
     )            
+   
+  # setupHeights
         
   switchInline: (stream, state, f) ->
     state.f = state.inline = f

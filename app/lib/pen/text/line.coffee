@@ -3,7 +3,6 @@ class Line
   styles: null
   text: null
   height: 0 
-  heightPX: 0
   marked: null
   gutterMarker: null   
   className: null
@@ -23,7 +22,7 @@ class Line
     @pen        = pen
     @styles     = styles or [text, null]
     @text       = text
-    @height     = 1
+    @height     = @pen.textHeight()
     @marked     = @gutterMarker = @className = @handlers = null
     @stateAfter = @parent = @hidden = null      
   
@@ -244,7 +243,7 @@ class Line
           style2 = style 
           style     = style.style 
           type      = style2.type  
-          @heightPX = style2.lineHeight
+          @height   = style2.lineHeight
           
         style = "cm-" + style 
         if type    
