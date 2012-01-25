@@ -160,3 +160,8 @@ div.Pen span.Pen-matchingbracket {
 div.Pen span.Pen-nonmatchingbracket {
   color: #f22;
 }
+h1 {
+  height: 26px;
+  margin: 0px;
+  line-height: 0px;
+}

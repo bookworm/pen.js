@@ -511,7 +511,7 @@ class Lines extends Events
       
     no_        
 
-  lineAtHeight: (chunk, h) ->     
+  lineAtHeight: (chunk, h) ->  
     n = 0
     loop  
       breakloop1 = false
@@ -527,8 +527,7 @@ class Lines extends Events
         h -= ch
         n += child.chunkSize()
         ++i    
-      return n    
-      continue unless breakLoop1  
+      continue unless breakloop1  
       break unless not chunk.lines   
       
     i = 0
@@ -540,7 +539,9 @@ class Lines extends Events
       break if h < lh
       h -= lh
       ++i
-    n + i       
+    n + i   
+     
+    return n   
 
   heightAtLine: (chunk, n) ->        
 

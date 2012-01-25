@@ -209,9 +209,6 @@ class Text extends Lines
     @measure.innerHTML   = @measureText
     @cachedHeight        = @measure.firstChild.offsetHeight / 50 or 1
     @measure.innerHTML   = ""        
-    console.log 'cached height'
-    console.log @cachedHeight  
-    console.log 'end cached height'
     @cachedHeight      
 
   charWidth: ->      

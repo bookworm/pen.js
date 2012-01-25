@@ -188,9 +188,6 @@ class Editor extends Selection
     
     lh      = @textHeight()
     pos     = @localCoords(head, true)       
-    console.log 'head'   
-    console.log head
-    console.log 'end head'
     wrapOff = @eltOffset(@wrapper)
     lineOff = @eltOffset(@lineDiv)   
     

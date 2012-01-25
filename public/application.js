@@ -12256,27 +12256,31 @@ module.exports = jQuery;}, "spine/index": function(exports, require, module) {mo
 
     Cursor.prototype.moveVF = function(dir, unit) {
       var dist, pos, target;
+      console.log('moveVF');
       dist = 0;
       pos = this.localCoords((this.sel.inverted ? this.sel.from : this.sel.to), true);
       if (this.goalColumn != null) pos.x = this.goalColumn;
+      console.log('moveVF 2');
       if (unit === "page") {
         dist = this.scroller.clientHeight;
       } else {
         if (unit === "line") dist = this.textHeight();
       }
+      console.log('moveVF d');
       target = this.coordsCharF(pos.x, pos.y + dist * dir + 2);
+      console.log('moveVF target');
+      console.log(target);
+      console.log('end moveVF target');
       this.setCursor(target.line, target.ch, true);
       return this.goalColumn = pos.x;
     };
 
     Cursor.prototype.localCoords = function(pos, inLineWrap) {
       var lh, sp, x, y;
+      console.trace();
       x = void 0;
       lh = this.textHeight();
-      console.log('heightAtLine');
-      console.log(this.heightAtLine(this.doc, pos.line));
-      console.log('end heightAtLine');
-      y = lh * (this.heightAtLine(this.doc, pos.line) - (inLineWrap ? this.displayOffset : 0));
+      y = this.heightAtLine(this.doc, pos.line);
       if (pos.ch === 0) {
         x = 0;
       } else {
@@ -12294,11 +12298,18 @@ module.exports = jQuery;}, "spine/index": function(exports, require, module) {mo
     Cursor.prototype.coordsCharF = function(x, y) {
       var cw, estX, estimated, from, fromX, getX, heightPos, innerOff, lineNo, lineObj, middle, middleX, text, th, to, toX, tw, _results;
       var _this = this;
+      console.log('coordsCharF');
       if (y < 0) y = 0;
       th = this.textHeight();
       cw = this.charWidth();
       heightPos = this.displayOffset + Math.floor(y / th);
       lineNo = this.lineAtHeight(this.doc, heightPos);
+      console.log('heightPos');
+      console.log(heightPos);
+      console.log('end heightPos');
+      console.log('lineNo');
+      console.log(lineNo);
+      console.log('end lineNo');
       if (lineNo >= this.doc.size) {
         return {
           line: this.doc.size - 1,
@@ -12349,6 +12360,7 @@ module.exports = jQuery;}, "spine/index": function(exports, require, module) {mo
         from = estimated;
         fromX = estX;
       }
+      console.log('made it all the way here');
       _results = [];
       while (true) {
         if (to - from <= 1) {
@@ -13006,9 +13018,9 @@ module.exports = jQuery;}, "spine/index": function(exports, require, module) {mo
       head = (this.sel.inverted ? this.sel.from : this.sel.to);
       lh = this.textHeight();
       pos = this.localCoords(head, true);
-      console.log('head');
-      console.log(head);
-      console.log('end head');
+      console.log('pos');
+      console.log(pos);
+      console.log('end pos');
       wrapOff = this.eltOffset(this.wrapper);
       lineOff = this.eltOffset(this.lineDiv);
       this.inputDiv.style.top = (pos.y + lineOff.top - wrapOff.top) + "px";
@@ -15398,7 +15410,7 @@ module.exports = jQuery;}, "spine/index": function(exports, require, module) {mo
     Markdown.prototype.list = {
       style: "string",
       type: "li",
-      lineHeight: 12
+      lineHeight: 13
     };
 
     Markdown.prototype.hr = "hr";
@@ -16257,8 +16269,6 @@ module.exports = jQuery;}, "spine/index": function(exports, require, module) {mo
 
     Line.prototype.height = 0;
 
-    Line.prototype.heightPX = 0;
-
     Line.prototype.marked = null;
 
     Line.prototype.gutterMarker = null;
@@ -16291,7 +16301,7 @@ module.exports = jQuery;}, "spine/index": function(exports, require, module) {mo
       this.getHTML = __bind(this.getHTML, this);      this.pen = pen;
       this.styles = styles || [text, null];
       this.text = text;
-      this.height = 1;
+      this.height = this.pen.textHeight();
       this.marked = this.gutterMarker = this.className = this.handlers = null;
       this.stateAfter = this.parent = this.hidden = null;
     }
@@ -16543,7 +16553,7 @@ module.exports = jQuery;}, "spine/index": function(exports, require, module) {mo
             style2 = style;
             style = style.style;
             type = style2.type;
-            _this.heightPX = style2.lineHeight;
+            _this.height = style2.lineHeight;
           }
           style = "cm-" + style;
           if (type) {
@@ -17248,6 +17258,9 @@ module.exports = jQuery;}, "spine/index": function(exports, require, module) {mo
 
     Lines.prototype.lineAtHeight = function(chunk, h) {
       var breakloop1, ch, child, e, i, lh, line, n;
+      console.log('lineAtHeight h');
+      console.log(h);
+      console.log('end lineAtHeight h');
       n = 0;
       while (true) {
         breakloop1 = false;
@@ -17265,8 +17278,7 @@ module.exports = jQuery;}, "spine/index": function(exports, require, module) {mo
           n += child.chunkSize();
           ++i;
         }
-        return n;
-        if (!breakLoop1) continue;
+        if (!breakloop1) continue;
         if (!!chunk.lines) break;
       }
       i = 0;
@@ -17278,7 +17290,8 @@ module.exports = jQuery;}, "spine/index": function(exports, require, module) {mo
         h -= lh;
         ++i;
       }
-      return n + i;
+      n + i;
+      return n;
     };
 
     Lines.prototype.heightAtLine = function(chunk, n) {
@@ -17894,9 +17907,6 @@ module.exports = jQuery;}, "spine/index": function(exports, require, module) {mo
       this.measure.innerHTML = this.measureText;
       this.cachedHeight = this.measure.firstChild.offsetHeight / 50 || 1;
       this.measure.innerHTML = "";
-      console.log('cached height');
-      console.log(this.cachedHeight);
-      console.log('end cached height');
       return this.cachedHeight;
     };
 

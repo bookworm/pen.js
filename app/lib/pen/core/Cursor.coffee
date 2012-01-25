@@ -109,31 +109,30 @@ class Cursor extends Display
       
     @userSelChange = true  
 
-  moveVF: (dir, unit) ->  
+  moveVF: (dir, unit) ->    
     dist = 0            
     
     pos   = @localCoords((if @sel.inverted then @sel.from else @sel.to), true)
-    pos.x = @goalColumn if @goalColumn?        
+    pos.x = @goalColumn if @goalColumn?  
+          
     
     if unit is "page"
       dist = @scroller.clientHeight
-    else dist = @textHeight() if unit is "line"        
+    else 
+      dist = @textHeight() if unit is "line"     
     
     target = @coordsCharF(pos.x, pos.y + dist * dir + 2)           
-    
     @setCursor target.line, target.ch, true     
     
     @goalColumn = pos.x
   
-  localCoords: (pos, inLineWrap) ->    
+  localCoords: (pos, inLineWrap) ->  
+    console.trace()
+      
     x   = undefined
     lh  = @textHeight()   
-    console.log 'heightAtLine'
-    console.log @heightAtLine(@doc, pos.line)   
-    console.log 'end heightAtLine' 
     
-    y   = lh * (@heightAtLine(@doc, pos.line) - (if inLineWrap then @displayOffset else 0))   
-    
+    y   = @heightAtLine(@doc, pos.line)        
     
     if pos.ch is 0
       x = 0
@@ -146,13 +145,14 @@ class Cursor extends Display
     y: y
     yBot: y + lh         
 
-  coordsCharF: (x, y) =>    
+  coordsCharF: (x, y) =>       
+    
     y  = 0 if y < 0
     th = @textHeight()
     cw = @charWidth()    
     
     heightPos = @displayOffset + Math.floor(y / th)
-    lineNo    = @lineAtHeight(@doc, heightPos)  
+    lineNo    = @lineAtHeight(@doc, heightPos)    
     
     if lineNo >= @doc.size
       return (
@@ -205,8 +205,8 @@ class Cursor extends Display
     
     if estX < x
       from  = estimated
-      fromX = estX 
-      
+      fromX = estX     
+            
     loop
       if to - from <= 1
         return (
@@ -222,8 +222,8 @@ class Cursor extends Display
         toX = middleX
       else
         from  = middle
-        fromX = middleX  
-
+        fromX = middleX        
+        
   pageCoords: (pos) ->     
     local = @localCoords(pos, true)
     off_  = @eltOffset(@lineSpace)  
