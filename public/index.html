@@ -6,13 +6,14 @@
   <link rel="stylesheet" href="application.css" type="text/css" media="all" /> 
   <script src="application.js" type="text/javascript" charset="utf-8"></script>        
   <script type="text/javascript" charset="utf-8">
-    // var jQuery  = require("jqueryify");
-    // var exports = this;
-    // jQuery(function(){
-    //   var App = require("index"); 
-    //   var bob = new App();
-    //   bob.go();
-    // });
+    var jQuery  = require("jqueryify");
+    var exports = this;
+    jQuery(function(){
+      var Pen = require("lib/pen/main");   
+      var MarkdownExample = require("lib/tests/markdown"); 
+      var mark = new MarkdownExample();
+      var pen = new Pen($('#editor'), {worktime: 100, value: mark.sampleDoc() });
+    });
   </script>
 </head>
 <body>       
