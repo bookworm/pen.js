@@ -16,7 +16,9 @@ class TextMarker
       line = @set[i]
       mk   = line.marked 
       
-      continue if not mk or not line.parent   
+      if not mk or not line.parent  
+        i++
+        continue  
       
       lineN = @pen.lineNo(line)
       min   = Math.min(min, lineN)

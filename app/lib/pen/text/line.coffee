@@ -97,8 +97,9 @@ class Line
                 mk.splice i--, 1
               breakLoop1 = true; break 
             ++j  
-          continue unless breakLoop1
-            
+          unless breakLoop1    
+            i++ 
+            continue 
             
         mymk.push mark
         mark.attach this

@@ -263,7 +263,8 @@ class Text extends Lines
       while i isnt e
         text = st[i]
         if st[i + 1]? and st[i + 1] isnt style
-          pos += d * text.length
+          pos += d * text.length            
+          i++
           continue              
 
         j  = (if forward then 0 else text.length - 1)
